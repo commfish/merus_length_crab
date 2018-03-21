@@ -35,7 +35,7 @@ ggplot(dat, aes(width, raw_merus)) +
 
 fit1 = lm(raw_merus ~ width, data = dat) 
 summary(fit1)
-plot(fit1)
+#plot(fit1)
 
 # confidence interval -----
 new.dat <- data.frame(width = seq(from =135, to = 215, length.out = 181))
@@ -68,8 +68,19 @@ ggplot(dat, aes(width, raw_merus)) +
 
 ## power analysis ------------
 # power analysis to determine sample size needed to predict if legal or not.
+# seperate data into legal and non groups
+head(dat)
+dat %>% 
+  mutate(legal = ifelse(width < 178, "N", "Y")) -> dat
 
+# average merus length by legal or not
+dat %>% 
+  group_by(legal) %>% 
+  summarise(average = mean(raw_merus), SD = sd(raw_merus))
 
+#average merus length overall
+dat %>% 
+  summarise(average = mean(raw_merus), SD = sd(raw_merus))
 
 
 
