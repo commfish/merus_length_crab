@@ -72,8 +72,39 @@ Footnote: black line is linear regression, red lines are confidence intervals an
 \newline
 
 
-## Power analysis between mean of legal and sublegal?
+## Goal: sample size needed to reduce variability in the regression line and therefore decrease the 95% prediction interval 
 
+Not sure if this is possible.  Suggestion would be to sample more intensely in area where there is overlap (see rectangle in figure below).  
+The carapace width range in this box is:
+```{r rectangle, echo= FALSE}
+dat %>% 
+  filter(raw_merus >124 & legal =="N") %>% 
+  summarise(min = min(width))
+
+dat %>% 
+  filter(legal == "Y" & raw_merus <144) %>% 
+  summarise(max = max(width))
+```
+
+``` {r sample area, echo=FALSE}
+ggplot(dat, aes(width, raw_merus)) +
+        geom_point(size =2, pch = 1) +
+        geom_line(data = confidenceI, aes(width, fit), color = "black", size = 1) +
+        #geom_line(data = confidenceI, aes(width, lwr), color = "red", lty = 2, size = 1) +
+        #geom_line(data = confidenceI, aes(width, upr), color = "red", lty =2, size = 1) +
+        geom_line(data = predictionI, aes(width, lwr), color = "blue", lty = 3, size = 1) +
+        geom_line(data = predictionI, aes(width, upr), color = "blue", lty =3, size = 1) +
+  xlab("carapace width (mm)") + ylab("merus length (mm)") + ggtitle("carapace width vs raw merus length") +
+  geom_vline( xintercept = 177.8, color = "red") + 
+  #geom_hline(yintercept = 125, color = "dark grey", size = 0.8) +
+  #geom_hline(yintercept = 144, color = "dark grey", size = 0.8) +
+  #geom_vline(xintercept = 151, color = "dark grey", size = 0.8) +
+  #geom_vline(xintercept = 194, color = "dark grey", size = 0.8) +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  geom_rect(data = dat, mapping = aes(xmin =151, xmax = 194, ymin= 125, ymax = 144), color= "gray52", alpha =0.0005)
+
+```
 #### Summary of all data: Mean carapace width and raw merus length
 ```{r power1, echo=FALSE}
 ## power analysis ------------
@@ -99,10 +130,15 @@ dat %>%
 ```
 
 \newline
+## Power analysis between mean of legal and sublegal?
 Conclusion: already a large difference between these two means power analyis for this will NOT help to reduce variablity in the regression and therefore the prediction interval.
 
-```{r power2, echo = FALSE}
 
+## Linear relationship by legal status
+```{r linear by group, echo = FALSE}
+ggplot(dat, aes(width, raw_merus, colour = legal)) +
+         geom_point(size =2) +
+         geom_smooth(method =lm)
 
 
 ```
