@@ -69,8 +69,10 @@ ggplot(dat, aes(width, raw_merus)) +
 
 Footnote: black line is linear regression, red lines are confidence intervals and blue dashed lines are the prediction intervals
 
+\newline
 
-## Power analysis between mean of legal and sublegal
+
+## Power analysis between mean of legal and sublegal?
 
 #### Summary of all data: Mean carapace width and raw merus length
 ```{r power1, echo=FALSE}
@@ -91,7 +93,16 @@ dat %>%
 # average merus length by legal or not
 dat %>% 
   group_by(legal) %>% 
-  summarise(avg_width = mean(width), avg_merus = mean(raw_merus), 
+  summarise(n = n(), avg_width = mean(width), avg_merus = mean(raw_merus), 
             width_SD = sd(width), merus_SD = sd(raw_merus))
+
+```
+
+\newline
+Conclusion: already a large difference between these two means power analyis for this will NOT help to reduce variablity in the regression and therefore the prediction interval.
+
+```{r power2, echo = FALSE}
+
+
 
 ```
