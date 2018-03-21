@@ -29,15 +29,15 @@ dat <- read.xlsx("./data/Donaldson Blackburn 1989 Data.xlsx", sheetName = "rinpu
 ggplot(dat, aes(width, raw_merus)) + 
          geom_point(size =2) +
          geom_smooth(method =lm)
+
+fit1 = lm(raw_merus ~ width, data = dat) 
+summary(fit1)
+#plot(fit1)
 ```
 
 ## Confidence and Prediction intervals
 
 ```{r intervals, echo=FALSE}
-fit1 = lm(raw_merus ~ width, data = dat) 
-summary(fit1)
-#plot(fit1)
-
 # confidence interval -----
 new.dat <- data.frame(width = seq(from =135, to = 215, length.out = 181))
 conf_inter <- predict(fit1, newdata = new.dat, interval = 'confidence')
