@@ -65,22 +65,38 @@ ggplot(dat, aes(width, raw_merus)) +
   geom_vline( xintercept = 177.8)
 
 
+# min and max values for graphing 
+dat %>% 
+  group_by(legal) %>% 
+  summarise(min = min(raw_merus), max = max(raw_merus))
+
+dat %>% 
+  filter(raw_merus >124 & legal =="N") %>% 
+  summarise(min = min(width))
+
+dat %>% 
+  filter(legal == "Y" & raw_merus <144) %>% 
+  summarise(max = max(width))
+
 
 ## power analysis ------------
 # power analysis to determine sample size needed to predict if legal or not.
 # seperate data into legal and non groups
-head(dat)
 dat %>% 
   mutate(legal = ifelse(width < 178, "N", "Y")) -> dat
 
 # average merus length by legal or not
 dat %>% 
   group_by(legal) %>% 
-  summarise(average = mean(raw_merus), SD = sd(raw_merus))
+  summarise(average = mean(raw_merus), SD = sd(raw_merus)) ->legal_sum
 
 #average merus length overall
 dat %>% 
   summarise(average = mean(raw_merus), SD = sd(raw_merus))
 
 
-
+# power to detect difference in mean between two groups
+d = (legal_sum$average[2] - legal_sum$average[1])/sd(dat$raw_merus)
+f = 0.5*d
+pwr.t.test(d= 0.3, power = .85, sig.level = 0.05, type = "two.sample", alternative = "two.sided")
+# power to detect small effect size between two means 85% power at 95% significance level.
