@@ -67,11 +67,15 @@ ggplot(dat, aes(width, raw_merus)) +
         geom_line(data = predictionI, aes(width, lwr), color = "blue", lty = 3, size = 1) +
         geom_line(data = predictionI, aes(width, upr), color = "blue", lty =3, size = 1) +
   xlab("carapace width (mm)") + ylab("merus length (mm)") + ggtitle("carapace width vs raw merus length") +
-  geom_vline( xintercept = 177.8)
+  geom_vline( xintercept = 177.8)+
+  geom_hline(yintercept = 136.7) +
+  geom_vline(xintercept = 165, color = "grey41", lty = 2) +
+  geom_hline(yintercept = 126.7, color = "grey41", lty = 2)
 ```
 
 
-Footnote: black line is linear regression, red lines are confidence intervals and blue dashed lines are the prediction intervals
+Footnote: black line is linear regression, red lines are confidence intervals and blue dashed lines are the prediction intervals.  
+Vertical and horisontal black line represents legal size in SE Alaska. Vertical and horizontal dashed gray line represents legal size in Bristol Bay (where data are taken from). 
 
 \newline
 
