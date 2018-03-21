@@ -74,7 +74,42 @@ Footnote: black line is linear regression, red lines are confidence intervals an
 
 ## Goal: sample size needed to reduce variability in the regression line and therefore decrease the 95% prediction interval 
 
-Not sure if this is possible.  Suggestion would be to sample more intensely in area where there is overlap (see rectangle in figure below).  
+Not sure if this is possible, increasing sample size will strengthen the linear relationship but will not reduce the underlying variability in this relationship. Suggestions for data sampling include:
+
+1) Sampling among carapace width bins to ensure coverage of the entire range of data, up to researchers to determine best bin widths.   
+2) Sample more intensely in bins that are within the area where there is overlap (see rectangle in figure below).  
+
+\newline
+
+3) Consider factors that affect growth and see if we can use these as covariates in this relationship.  Example: shell condition?   
+
+4) Spatial considerations on this relationship.
+
+
+\newline
+
+\newline
+
+``` {r sample area, echo=FALSE}
+ggplot(dat, aes(width, raw_merus)) +
+        geom_point(size =2, pch = 1) +
+        geom_line(data = confidenceI, aes(width, fit), color = "black", size = 1) +
+        #geom_line(data = confidenceI, aes(width, lwr), color = "red", lty = 2, size = 1) +
+        #geom_line(data = confidenceI, aes(width, upr), color = "red", lty =2, size = 1) +
+        geom_line(data = predictionI, aes(width, lwr), color = "blue", lty = 3, size = 1) +
+        geom_line(data = predictionI, aes(width, upr), color = "blue", lty =3, size = 1) +
+  xlab("carapace width (mm)") + ylab("merus length (mm)") + ggtitle("Intense sample area: carapace width vs raw merus length") +
+  geom_vline( xintercept = 177.8, color = "red") + 
+  #geom_hline(yintercept = 125, color = "dark grey", size = 0.8) +
+  #geom_hline(yintercept = 144, color = "dark grey", size = 0.8) +
+  #geom_vline(xintercept = 151, color = "dark grey", size = 0.8) +
+  #geom_vline(xintercept = 194, color = "dark grey", size = 0.8) +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  geom_rect(data = dat, mapping = aes(xmin =151, xmax = 194, ymin= 125, ymax = 144), color= "gray52", alpha =0.0005)
+
+```
+
 The carapace width range in this box is:
 ```{r rectangle, echo= FALSE}
 # seperate data into legal and non groups
@@ -89,25 +124,12 @@ dat %>%
   summarise(max = max(width))
 ```
 
-``` {r sample area, echo=FALSE}
-ggplot(dat, aes(width, raw_merus)) +
-        geom_point(size =2, pch = 1) +
-        geom_line(data = confidenceI, aes(width, fit), color = "black", size = 1) +
-        #geom_line(data = confidenceI, aes(width, lwr), color = "red", lty = 2, size = 1) +
-        #geom_line(data = confidenceI, aes(width, upr), color = "red", lty =2, size = 1) +
-        geom_line(data = predictionI, aes(width, lwr), color = "blue", lty = 3, size = 1) +
-        geom_line(data = predictionI, aes(width, upr), color = "blue", lty =3, size = 1) +
-  xlab("carapace width (mm)") + ylab("merus length (mm)") + ggtitle("carapace width vs raw merus length") +
-  geom_vline( xintercept = 177.8, color = "red") + 
-  #geom_hline(yintercept = 125, color = "dark grey", size = 0.8) +
-  #geom_hline(yintercept = 144, color = "dark grey", size = 0.8) +
-  #geom_vline(xintercept = 151, color = "dark grey", size = 0.8) +
-  #geom_vline(xintercept = 194, color = "dark grey", size = 0.8) +
-  scale_x_continuous() +
-  scale_y_continuous() +
-  geom_rect(data = dat, mapping = aes(xmin =151, xmax = 194, ymin= 125, ymax = 144), color= "gray52", alpha =0.0005)
+\newline
 
-```
+
+
+\newline
+
 #### Summary of all data: Mean carapace width and raw merus length
 ```{r power1, echo=FALSE}
 ## power analysis ------------
