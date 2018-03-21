@@ -8,7 +8,33 @@
 # Load Packages ------
 library(tidyverse)
 options(scipen=999)
-
+library(xlsx)
 
 # Data -------
-dat <- read.csv("./data/tanner_dockside_13_16.csv")
+dat <- read.xlsx("./data/Donaldson Blackburn 1989 Data.xlsx", sheetName = "rinput")
+
+# plot data -----
+ggplot(dat, aes(width, raw_merus)) + 
+         geom_point(size =2) +
+         geom_smooth(method =lm)
+         
+
+
+
+# Regression ---
+# carapace width (width) vs. raw_merus length
+
+fit1 = lm(raw_merus ~ width, data = dat) 
+summary(fit1)
+plot(fit1)
+
+# confidence interval -----
+new.dat <- data.frame(width = seq(from =135, to = 215, length.out = 181))
+conf_inter <- predict(fit1, newdata = new.dat, interval = 'confidence')
+
+
+# prediction interval ------
+
+
+# function ----
+mean.pred.intervals(dat$width, dat$raw_merus, new.dat)
