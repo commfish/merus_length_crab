@@ -10,6 +10,7 @@ library(tidyverse)
 options(scipen=999)
 library(xlsx)
 library(extrafont)
+library(pwr)
 loadfonts(device="win")
 windowsFonts(Times=windowsFont("TT Times New Roman"))
 
@@ -60,11 +61,15 @@ ggplot(dat, aes(width, raw_merus)) +
         geom_line(data = confidenceI, aes(width, upr), color = "red", lty =2, size = 1) +
         geom_line(data = predictionI, aes(width, lwr), color = "blue", lty = 3, size = 1) +
         geom_line(data = predictionI, aes(width, upr), color = "blue", lty =3, size = 1) +
-  xlab("carapace width (mm)") + ylab("merus length (mm)") + ggtitle("carapace width vs raw merus length")
-
-# function ----
-#mean.pred.intervals(dat$width, dat$raw_merus, new.dat)
+  xlab("carapace width (mm)") + ylab("merus length (mm)") + ggtitle("carapace width vs raw merus length") +
+  geom_vline( xintercept = 177.8)
 
 
 
+## power analysis ------------
 # power analysis to determine sample size needed to predict if legal or not.
+
+
+
+
+
