@@ -7,7 +7,7 @@ output: word_document
 
 Data presented here is taken from Donaldson & Blackburn 1989. THe objective of their study was to "describe the merus length - carapace width relationship for male red king crab of the Bristol Bay population". 
 
-Caveat: In this exploratory analysis we are using Bristol Bay data but the legal size for Southeast Alaska. One would expect the data maybe different for Southeast Alaska. 
+Caveat: In this exploratory analysis we are using Bristol Bay data but the legal size for Southeast Alaska. One would expect the data maybe different for Southeast Alaska due to difference in growth. 
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
