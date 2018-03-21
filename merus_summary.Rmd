@@ -73,7 +73,7 @@ Footnote: black line is linear regression, red lines are confidence intervals an
 ## Power analysis between mean of legal and sublegal
 
 #### Summary of all data: Mean carapace width and raw merus length
-```{r legal or not, echo=FALSE}
+```{r power1, echo=FALSE}
 ## power analysis ------------
 # power analysis to determine sample size needed to predict if legal or not.
 # seperate data into legal and non groups
