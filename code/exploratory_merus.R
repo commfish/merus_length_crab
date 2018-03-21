@@ -38,3 +38,7 @@ conf_inter <- predict(fit1, newdata = new.dat, interval = 'confidence')
 
 # function ----
 mean.pred.intervals(dat$width, dat$raw_merus, new.dat)
+
+
+
+# power analysis to determine sample size needed to predict if legal or not.
