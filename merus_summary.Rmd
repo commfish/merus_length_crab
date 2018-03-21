@@ -77,6 +77,9 @@ Footnote: black line is linear regression, red lines are confidence intervals an
 Not sure if this is possible.  Suggestion would be to sample more intensely in area where there is overlap (see rectangle in figure below).  
 The carapace width range in this box is:
 ```{r rectangle, echo= FALSE}
+# seperate data into legal and non groups
+dat %>% 
+  mutate(legal = ifelse(width < 178, "N", "Y")) -> dat
 dat %>% 
   filter(raw_merus >124 & legal =="N") %>% 
   summarise(min = min(width))
@@ -109,9 +112,7 @@ ggplot(dat, aes(width, raw_merus)) +
 ```{r power1, echo=FALSE}
 ## power analysis ------------
 # power analysis to determine sample size needed to predict if legal or not.
-# seperate data into legal and non groups
-dat %>% 
-  mutate(legal = ifelse(width < 178, "N", "Y")) -> dat
+
 #average merus length overall
 dat %>% 
   summarise(avg_width = mean(width), avg_merus = mean(raw_merus), 
