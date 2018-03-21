@@ -126,12 +126,36 @@ dat %>%
 
 \newline
 
+\newline
+\newline
+## Power analysis 
 
+### For linear regression
+The general guidline for a linear regression with a significance level of .05 and a power of 85% without prior knowledge would suggest a sample size of 449 (see results below). Increasing the power to 95%, under the same conditions would yield a same size of 650.
 
 \newline
+However, using the knowledge of the existing relationship above will decrease the sample size needed but reducing the effect size (because you already know there is a strong linear relationship). This suggests a sample size of 150 (alpha = 0.05, power = 85%) and a sample size of 217 (alpha = 0.05, power = 95%). 
+
+
+```{r power1, echo=FALSE}
+## power analysis ------------
+# power analysis to determine sample size needed for a linear regression.
+# use f2 suggested be cohen, small, medium, and large (0.05=2,0.15,0.35)
+print("General regression sample size")
+pwr.f2.test(u=1, f2 =0.02, sig.level = 0.05, power = 0.85)
+#pwr.f2.test(u=1, f2 =0.02, sig.level = 0.05, power = 0.95)
+
+print("Using knowledge of the relationship decreases neccessary sample size")
+pwr.f2.test(u=1, f2 =0.06, sig.level = 0.05, power = 0.85)
+pwr.f2.test(u=1, f2 =0.06, sig.level = 0.05, power = 0.95)
+```
+
+
+### Between mean of legal and sublegal?
+Conclusion: already a large difference between these two means power analyis for this will NOT help to reduce variablity in the regression and therefore the prediction interval.
 
 #### Summary of all data: Mean carapace width and raw merus length
-```{r power1, echo=FALSE}
+```{r power2, echo=FALSE}
 ## power analysis ------------
 # power analysis to determine sample size needed to predict if legal or not.
 
@@ -151,10 +175,6 @@ dat %>%
             width_SD = sd(width), merus_SD = sd(raw_merus))
 
 ```
-
-\newline
-## Power analysis between mean of legal and sublegal?
-Conclusion: already a large difference between these two means power analyis for this will NOT help to reduce variablity in the regression and therefore the prediction interval.
 
 
 ## Linear relationship by legal status
