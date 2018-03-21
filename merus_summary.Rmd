@@ -1,0 +1,42 @@
+---
+title: "merus length vs carapace width"
+author: "Katie Palof"
+date: "March 21, 2018"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+options(scipen=999)
+library(xlsx)
+library(extrafont)
+library(pwr)
+loadfonts(device="win")
+windowsFonts(Times=windowsFont("TT Times New Roman"))
+
+theme_set(theme_bw(base_size=12,base_family='Times New Roman')+ 
+            theme(panel.grid.major = element_blank(),
+                  panel.grid.minor = element_blank()))
+
+dat <- read.xlsx("./data/Donaldson Blackburn 1989 Data.xlsx", sheetName = "rinput")
+```
+
+## Linear relationship between carapace width and raw merus length
+
+
+```{r linear}
+ggplot(dat, aes(width, raw_merus)) + 
+         geom_point(size =2) +
+         geom_smooth(method =lm)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
