@@ -65,7 +65,33 @@ ggplot(dat, aes(width, raw_merus)) +
   xlab("carapace width (mm)") + ylab("merus length (mm)") + ggtitle("carapace width vs raw merus length") +
   geom_vline( xintercept = 177.8)
 ```
+
+
 Footnote: black line is linear regression, red lines are confidence intervals and blue dashed lines are the prediction intervals
 
 
+## Power analysis between mean of legal and sublegal
 
+#### Summary of all data: Mean carapace width and raw merus length
+```{r legal or not, echo=FALSE}
+## power analysis ------------
+# power analysis to determine sample size needed to predict if legal or not.
+# seperate data into legal and non groups
+dat %>% 
+  mutate(legal = ifelse(width < 178, "N", "Y")) -> dat
+#average merus length overall
+dat %>% 
+  summarise(avg_width = mean(width), avg_merus = mean(raw_merus), 
+            width_SD = sd(width), merus_SD = sd(raw_merus))
+```
+
+#### Summary by legal status, mean and standard deviations(SD)
+```{r legal or not, echo=FALSE}
+
+# average merus length by legal or not
+dat %>% 
+  group_by(legal) %>% 
+  summarise(avg_width = mean(width), avg_merus = mean(raw_merus), 
+            width_SD = sd(width), merus_SD = sd(raw_merus))
+
+```
