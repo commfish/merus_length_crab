@@ -54,12 +54,13 @@ pred_inter %>%
 
 # visual of confidence and predictive intervals -----
 ggplot(dat, aes(width, raw_merus)) +
-        geom_point(size =2) +
-        geom_line(data = confidenceI, aes(width, fit), color = "red", size = 1) +
+        geom_point(size =2, pch = 1) +
+        geom_line(data = confidenceI, aes(width, fit), color = "black", size = 1) +
         geom_line(data = confidenceI, aes(width, lwr), color = "red", lty = 2, size = 1) +
         geom_line(data = confidenceI, aes(width, upr), color = "red", lty =2, size = 1) +
         geom_line(data = predictionI, aes(width, lwr), color = "blue", lty = 3, size = 1) +
-        geom_line(data = predictionI, aes(width, upr), color = "blue", lty =3, size = 1) 
+        geom_line(data = predictionI, aes(width, upr), color = "blue", lty =3, size = 1) +
+  xlab("carapace width (mm)") + ylab("merus length (mm)") + ggtitle("carapace width vs raw merus length")
 
 # function ----
 #mean.pred.intervals(dat$width, dat$raw_merus, new.dat)
