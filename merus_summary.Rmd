@@ -74,8 +74,9 @@ ggplot(dat, aes(width, raw_merus)) +
 ```
 
 
-Footnote: black line is linear regression, red lines are confidence intervals and blue dashed lines are the prediction intervals.  
-Vertical and horisontal black line represents legal size in SE Alaska. Vertical and horizontal dashed gray line represents legal size in Bristol Bay (where data are taken from). 
+Footnote: 
+
+Black line is linear regression, red lines are confidence intervals and blue dashed lines are the prediction intervals.  Vertical and horisontal black line represents legal size in SE Alaska. Vertical and horizontal dashed gray line represents legal size in Bristol Bay (where data are taken from). 
 
 \newline
 
