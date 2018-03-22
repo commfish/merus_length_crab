@@ -65,7 +65,7 @@ ggplot(dat, aes(width, raw_merus)) +
   geom_vline( xintercept = 177.8)
 
 
-# min and max values for graphing 
+# min and max values for graphing ------
 dat %>% 
   group_by(legal) %>% 
   summarise(min = min(raw_merus), max = max(raw_merus))
@@ -78,6 +78,9 @@ dat %>%
   filter(legal == "Y" & raw_merus <144) %>% 
   summarise(max = max(width))
 
+newdata2 = data.frame(width = c(165, 177.8))
+# y intercept when x = 165 and 177.8
+predict(fit1, newdata = newdata2, interval = 'prediction')
 
 ## power analysis ------------
 # power analysis to determine sample size needed to predict if legal or not.
