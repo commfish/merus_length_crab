@@ -88,14 +88,9 @@ Not sure if this is possible, increasing sample size will strengthen the linear 
 1) Sampling among carapace width bins to ensure coverage of the entire range of data, up to researchers to determine best bin widths.   
 2) Sample more intensely in bins that are within the area where there is overlap (see rectangle in figure below).  
 
-\newline
-
 3) Consider factors that affect growth and see if we can use these as covariates in this relationship.  Example: shell condition?   
 
 4) Spatial considerations on this relationship.
-
-
-\newline
 
 \newline
 
